@@ -2,6 +2,7 @@
 let digitButtons = document.querySelectorAll('.digitBtn');
 let operationButtons = document.querySelectorAll('.operationBtn');
 let display = document.querySelector('input[type="text"]');
+let equalBtn = document.querySelector('.equalBtn');
 let clearBtn = document.querySelector('.clearBtn');
 display.value = '';
 
@@ -30,15 +31,14 @@ const operate = function (num1, operator, num2) {
 };
 
 const updateDisplay = function (e) {
-  display.value = add(display.value, e.target.value);
+  display.value = add(display.value, e.target.value); //string concat
 };
 
 const operation = function (e) {
-  if (e.target.value === '=') {
+  if (num1 !== '' && num2 !== '' && operator !== '') {
     num2 = Number(display.value);
-    display.value = operate(num1, operator, num2);
-    operator = '';
-  } else if (operator !== '') {
+    num1 = operate(num1, operator, num2);
+    operator = e.target.value;
   } else {
     num1 = Number(display.value);
     operator = e.target.value;
@@ -46,17 +46,24 @@ const operation = function (e) {
   }
 };
 
+const showResult = function () {
+  num2 = Number(display.value);
+  display.value = operate(num1, operator, num2);
+  // operator = '';
+};
+
 const clearCalculator = function () {
   display.value = '';
 
   //reset everything
-  num1 = 0;
-  num2 = 0;
+  num1 = '';
+  num2 = '';
   operator = '';
 };
+
 //variables
-let num1 = 0;
-let num2 = 0;
+let num1 = '';
+let num2 = '';
 let operator = '';
 
 //Dom
@@ -67,3 +74,4 @@ operationButtons.forEach((button) => {
   button.addEventListener('click', operation);
 });
 clearBtn.addEventListener('click', clearCalculator);
+equalBtn.addEventListener('click', showResult);
