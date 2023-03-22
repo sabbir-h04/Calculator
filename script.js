@@ -35,10 +35,15 @@ const updateDisplay = function (e) {
 };
 
 const operation = function (e) {
-  if (num1 !== '' && num2 !== '' && operator !== '') {
-    num2 = Number(display.value);
-    num1 = operate(num1, operator, num2);
+  if (display.value === '' && num1 === '' && operator === '')
+    alert('Please enter a digit!');
+  else if (num1 !== '' && operator !== '') {
+    if (display.value !== '') {
+      num2 = Number(display.value);
+      num1 = operate(num1, operator, num2);
+    }
     operator = e.target.value;
+    display.value = '';
   } else {
     num1 = Number(display.value);
     operator = e.target.value;
@@ -47,9 +52,11 @@ const operation = function (e) {
 };
 
 const showResult = function () {
-  num2 = Number(display.value);
-  display.value = operate(num1, operator, num2);
-  // operator = '';
+  if (display.value === '') alert('Please enter a digit!');
+  else {
+    num2 = Number(display.value);
+    display.value = operate(num1, operator, num2);
+  }
 };
 
 const clearCalculator = function () {
