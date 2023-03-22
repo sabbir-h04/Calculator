@@ -2,6 +2,7 @@
 let digitButtons = document.querySelectorAll('.digitBtn');
 let operationButtons = document.querySelectorAll('.operationBtn');
 let display = document.querySelector('input[type="text"]');
+let clearBtn = document.querySelector('.clearBtn');
 display.value = '';
 
 //functions
@@ -45,6 +46,14 @@ const operation = function (e) {
   }
 };
 
+const clearCalculator = function () {
+  display.value = '';
+
+  //reset everything
+  num1 = 0;
+  num2 = 0;
+  operator = '';
+};
 //variables
 let num1 = 0;
 let num2 = 0;
@@ -57,3 +66,4 @@ digitButtons.forEach((button) => {
 operationButtons.forEach((button) => {
   button.addEventListener('click', operation);
 });
+clearBtn.addEventListener('click', clearCalculator);
