@@ -1,4 +1,5 @@
 //query selectors
+let buttons = document.querySelectorAll('.btn');
 let digitButtons = document.querySelectorAll('.digitBtn');
 let operationButtons = document.querySelectorAll('.operationBtn');
 let display = document.querySelector('input[type="text"]');
@@ -77,12 +78,21 @@ const clearCalculator = function (e) {
   operator = '';
 };
 
+const playSound = function () {
+  let audio = new Audio('./audio/button03.mp3');
+  audio.play();
+  audio.volume = 0.5;
+};
+
 //variables
 let num1 = '';
 let num2 = '';
 let operator = '';
 
 //Dom
+buttons.forEach((button) => {
+  button.addEventListener('click', playSound);
+});
 digitButtons.forEach((button) => {
   button.addEventListener('click', updateDisplay);
 });
